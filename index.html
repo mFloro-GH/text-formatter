@@ -201,6 +201,7 @@
       <option value="double">Double quotes + comma &nbsp;&nbsp; "value",</option>
       <option value="upper">Convert to UPPERCASE</option>
       <option value="lower">Convert to lowercase</option>
+      <option value="underscore">Trim &amp; replace spaces with underscores</option>
     </select>
     <div class="toolbar-actions">
       <button class="btn-primary" onclick="convert()">Convert</button>
@@ -267,8 +268,9 @@
           case 'single': return `'${line}',`;
           case 'double': return `"${line}",`;
           case 'upper':  return line.toUpperCase();
-          case 'lower':  return line.toLowerCase();
-          default:       return line;
+          case 'lower':      return line.toLowerCase();
+          case 'underscore': return line.trim().replace(/\s+/g, '_');
+          default:           return line;
         }
       });
 
