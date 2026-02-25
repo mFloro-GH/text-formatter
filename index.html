@@ -232,6 +232,8 @@
       <option value="upper">Convert to UPPERCASE</option>
       <option value="lower">Convert to lowercase</option>
       <option value="underscore">Trim &amp; replace spaces with underscores</option>
+      <option value="camel">Lower camelCase &nbsp;&nbsp; helloWorld</option>
+      <option value="pascal">Upper CamelCase (PascalCase) &nbsp;&nbsp; HelloWorld</option>
     </select>
     <div class="toolbar-actions">
       <button class="btn-primary" onclick="convert()">Convert</button>
@@ -304,6 +306,8 @@
           case 'upper':  return line.toUpperCase();
           case 'lower':      return line.toLowerCase();
           case 'underscore': return line.trim().replace(/\s+/g, '_');
+          case 'camel':      return toCamel(line, false);
+          case 'pascal':     return toCamel(line, true);
           default:           return line;
         }
       });
@@ -315,6 +319,16 @@
       const btn = document.getElementById('copy-btn');
       btn.textContent = 'Copy';
       btn.classList.remove('copied');
+    }
+
+    // ── Camel case helper ─────────────────────────────────────────────
+    function toCamel(line, upper) {
+      const words = line.trim().split(/[\s_\-]+/).filter(Boolean);
+      return words.map((w, i) =>
+        (i === 0 && !upper)
+          ? w.toLowerCase()
+          : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
+      ).join('');
     }
 
     // ── Swap panes ────────────────────────────────────────────────────
