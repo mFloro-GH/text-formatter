@@ -234,6 +234,7 @@
       <option value="underscore">Trim &amp; replace spaces with underscores</option>
       <option value="camel">Lower camelCase &nbsp;&nbsp; helloWorld</option>
       <option value="pascal">Upper CamelCase (PascalCase) &nbsp;&nbsp; HelloWorld</option>
+      <option value="bracket">Wrap in square brackets &nbsp;&nbsp;&nbsp;&nbsp; [value]</option>
     </select>
     <div class="toolbar-actions">
       <button class="btn-primary" onclick="convert()">Convert</button>
@@ -308,6 +309,7 @@
           case 'underscore': return line.trim().replace(/\s+/g, '_');
           case 'camel':      return toCamel(line, false);
           case 'pascal':     return toCamel(line, true);
+          case 'bracket':    return `[${line}]`;
           default:           return line;
         }
       });
